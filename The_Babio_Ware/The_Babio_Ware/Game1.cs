@@ -11,7 +11,7 @@ public class Game1 : Game
 
     public static Texture2D DebugPixel;
 
-    public Button DebugButton;
+    public GameManager gameManager;
     
     public Game1()
     {
@@ -22,27 +22,32 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-        // TODO: Add your initialization logic here
-
+        Globals.gdm = _graphics;
+        Globals.gd = GraphicsDevice;
+        Globals.cm = Content;
+        Globals.windowSettings.Init(1920, 1080, false);
         base.Initialize();
     }
 
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
+        Globals.sb = _spriteBatch;
 
         DebugPixel = new Texture2D(GraphicsDevice, 1, 1);
         DebugPixel.SetData(new[] {Color.White});
 
-        DebugButton = new Button(DebugPixel, new(0,0));
+        gameManager = new GameManager();
     }
 
     protected override void Update(GameTime gameTime)
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
-        DebugButton.Update();
-        GameManager.Update(gameTime);
+
+        Globals.GameTimeVoid(gameTime);
+        InputManager.Update();
+        gameManager.Update(gameTime);
 
         base.Update(gameTime);
     }
@@ -50,10 +55,7 @@ public class Game1 : Game
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
-        _spriteBatch.Begin();
-        DebugButton.Draw(_spriteBatch);
-        _spriteBatch.End();
-
+        gameManager.Draw(_spriteBatch);
         base.Draw(gameTime);
     }
 }

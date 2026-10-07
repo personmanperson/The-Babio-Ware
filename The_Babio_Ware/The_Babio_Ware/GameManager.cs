@@ -2,14 +2,66 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Graphics;
 
 
 namespace The_Babio_Ware;
 
-public static class GameManager
+public class GameManager
 {
-    public static void Update(GameTime gameTime)
+    private readonly SceneManager _sceneManager;
+    private readonly Curtains _curtain;
+
+    public GameManager()
     {
-        InputManager.Update();
+        _sceneManager = new SceneManager(this);
+        _curtain = new Curtains();
+    }
+
+    public void Update(GameTime gameTime)
+    {
+        if (InputManager.KeyDown(Keys.F1))
+        {
+            _sceneManager.SwitchScene(Scenes.TitleScreen);
+            Globals.SwitchScene = false;
+        }
+
+        if (InputManager.KeyDown(Keys.F2))
+        {
+            _sceneManager.SwitchScene(Scenes.FlySwat);
+            Globals.SwitchScene = false;
+        }
+        
+        if (InputManager.KeyDown(Keys.F3))
+        {
+            _sceneManager.SwitchScene(Scenes.STOPTHEFIRE);
+            Globals.SwitchScene = false;
+        }
+
+        if (InputManager.KeyDown(Keys.F4))
+        {
+            _sceneManager.SwitchScene(Scenes.JudgeCriminal);
+            Globals.SwitchScene = false;
+        }
+
+
+        if(Globals.SwitchScene && !Globals.TransitionState)
+        {
+            _sceneManager.SwitchScene(Scenes.STOPTHEFIRE);
+            Globals.SwitchScene = false;
+        }
+
+        _sceneManager.Update();
+        _curtain.Update();
+    }
+
+    public void Draw(SpriteBatch spriteBatch)
+    {
+        var frame = _sceneManager.GetFrame();
+
+        spriteBatch.Begin();
+        Globals.sb.Draw(frame, new Rectangle(0, 0, Globals.VirtualWidth, Globals.VirtualHeight), Color.White);
+        _curtain.Draw();
+        spriteBatch.End();
     }
 }
