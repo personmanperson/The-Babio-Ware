@@ -68,7 +68,7 @@ public class SplashSprite
 
     public void Draw(SpriteBatch sb, Color? color = null, SpriteEffects spfx = SpriteEffects.None)
     {
-        Color final = color ?? defaultColor;
-        sb.Draw(_tex, _pos, null, final, _rotation, _origin, spriteScale, spfx, 0f);
+        Color finalColor = color ?? defaultColor;
+        sb.Draw(_tex, _pos, null, finalColor, _rotation, _origin, spriteScale, spfx, 0f);
     }
 }

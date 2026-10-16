@@ -11,5 +11,6 @@ public enum Scenes
     FlySwat,
     STOPTHEFIRE,
     JudgeCriminal,
+    StopDemonsFromHell,
 }
 

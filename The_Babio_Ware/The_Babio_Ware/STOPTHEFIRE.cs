@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace The_Babio_Ware;
 
@@ -56,6 +58,7 @@ public class STOPTHEFIRE(GameManager gameManager) : Scene(gameManager)
     public int Points;
     public int PointsToWin;
     public float levelTimer;
+    public Song levelAudio;
 
     public bool wateringCanUsed = false;
     public SplashSprite wateringCan;
@@ -67,6 +70,7 @@ public class STOPTHEFIRE(GameManager gameManager) : Scene(gameManager)
         waterTex = Globals.cm.Load<Texture2D>("waterdrop");
         steamTex = Globals.cm.Load<Texture2D>("smokeit");
         wateringCan = new(Globals.cm.Load<Texture2D>("thecan"), new(InputManager.MousePosition.X, InputManager.MousePosition.Y), 0.3f);
+        levelAudio = Globals.cm.Load<Song>("fu");
     }
 
     public override void Activate()
@@ -81,6 +85,7 @@ public class STOPTHEFIRE(GameManager gameManager) : Scene(gameManager)
         steams = new();
         droplets = new();
         fires = new();
+        MediaPlayer.Play(levelAudio);
     }
     
     public override void Deactivate()
@@ -91,6 +96,10 @@ public class STOPTHEFIRE(GameManager gameManager) : Scene(gameManager)
         droplets.Clear();
         fires.Clear();
         steams.Clear();
+        if (MediaPlayer.State != MediaState.Stopped)
+        {
+            MediaPlayer.Stop();
+        }
     }
 
     public void DROPWATERFROMCURSOR()

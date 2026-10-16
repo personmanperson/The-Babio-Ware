@@ -15,6 +15,7 @@ public struct FloatingPointRectangle
     public float Left => X;
     public float Right => X + Width;
     public Vector2 Center => new Vector2(X + Width / 2, Y + Height / 2);
+    public Rectangle toRect => new((int)X, (int)Y, (int)Width, (int)Height);
 
     public FloatingPointRectangle(float x, float y, float width, float height)
     {
@@ -64,5 +65,10 @@ public struct FloatingPointRectangle
     public Rectangle ToRectangle()
     {
         return new Rectangle((int)X, (int)Y, (int)Width, (int)Height);
+    }
+
+    public void Describe()
+    {
+        Console.WriteLine($"X: {X}, Y: {Y}, Width: {Width}, Height: {Height}");
     }
 }

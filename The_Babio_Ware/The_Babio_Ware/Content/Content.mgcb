@@ -39,6 +39,13 @@
 /processorParam:Version=3.8.5.1
 /build:6739-removebg-preview.png;MJ-2.png
 
+#begin Cee Lo Green - Forget You-[AudioTrimmer.com].mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.5.1
+/build:Cee Lo Green - Forget You-[AudioTrimmer.com].mp3;fu.mp3
+
 #begin curtain_PNG47.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -51,6 +58,19 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:curtain_PNG47.png;curtain.png
+
+#begin Devil_Flanders-Sheet-export.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:Devil_Flanders-Sheet-export.png;flanders.png
 
 #begin Document.jpg
 /importer:TextureImporter
@@ -91,6 +111,19 @@
 /processorParam:Version=3.8.5.1
 /build:file-removebg-preview.png;thecan.png
 
+#begin geert.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:geert.png;gun.png
+
 #begin Gerber_LogoMark-removebg-preview.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -103,6 +136,13 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:Gerber_LogoMark-removebg-preview.png;StartButton.png
+
+#begin igexport-Db6MVjlRmXg.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.5.1
+/build:igexport-Db6MVjlRmXg.mp3;crumbllabubu.mp3
 
 #begin images (16).jpg
 /importer:TextureImporter
@@ -143,6 +183,32 @@
 /processorParam:Version=3.8.5.1
 /build:images-removebg-preview (2).png;MJ-3.png
 
+#begin images-removebg-preview (3).png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:images-removebg-preview (3).png;gerberhair.png
+
+#begin Johan_Liebert_fullbody-removebg-preview.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:Johan_Liebert_fullbody-removebg-preview.png;criminal2.png
+
 #begin Landfill.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -155,6 +221,19 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:Landfill.png;landfill.png
+
+#begin Mahito__Anime_-removebg-preview.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:Mahito__Anime_-removebg-preview.png;criminal1.png
 
 #begin michael_jackson_smooth_criminal_minus_vitiligo__by_kahdin_dipe4m1-pre.png
 /importer:TextureImporter
@@ -181,6 +260,13 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:parkview_int_livrm_strt1_ca_pic_eb_mb_p23055_if.png;houseview.png
+
+#begin pistol-shot.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.5.1
+/build:pistol-shot.mp3;pew.mp3
 
 #begin plaid-wallpaper-1600x900.jpg
 /importer:TextureImporter
@@ -259,6 +345,39 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:pngtree-swatted-fly-green-png-image_9969685.png;deadfly.png
+
+#begin squish-cut.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.5.1
+/build:squish-cut.mp3;squish.mp3
+
+#begin TappedOutBlueDemon-Sheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:TappedOutBlueDemon-Sheet.png;blueguy.png
+
+#begin The_Devil_Unlock-Sheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:The_Devil_Unlock-Sheet.png;moe.png
 
 #begin todo-black-flash-jujutsu-kaisen.gif
 /importer:TextureImporter

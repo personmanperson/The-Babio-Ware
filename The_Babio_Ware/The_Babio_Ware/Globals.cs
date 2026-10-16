@@ -41,9 +41,19 @@ public static class Globals
 
     public static Random Random = new Random();
 
+    public static T GetRandomItem<T>(List<T>  list)
+    {
+        if (list == null || list.Count == 0)
+            throw new ArgumentException("List cannot be null or empty.");
+
+        return list[Random.Next(list.Count)];
+    }
+
     
     public const int VirtualWidth = 1920;
     public const int VirtualHeight = 1080;
+    
+    public static Vector2 ScreenCenter => new(VirtualWidth/2, VirtualHeight/2);
 
     public static WindowSettings windowSettings = new WindowSettings() { Width = VirtualWidth, Height = VirtualHeight, Fullscreen = false };
 

@@ -18,7 +18,7 @@ public class SceneManager
             { Scenes.FlySwat, new FlySwat(gameManager) },
             { Scenes.STOPTHEFIRE, new STOPTHEFIRE(gameManager) },
             { Scenes.JudgeCriminal, new JudgeCriminal(gameManager) },
-            //{ Scenes.Minigame4, new Minigame4(gameManager) },
+            { Scenes.StopDemonsFromHell, new StopDemonsFromHell(gameManager) },
             //{ Scenes.Minigame5, new Minigame5(gameManager) },
             //{ Scenes.Minigame6, new Minigame6(gameManager) },
             //{ Scenes.Minigame7, new Minigame7(gameManager) },

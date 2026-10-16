@@ -47,7 +47,7 @@ public class GameManager
 
         if(Globals.SwitchScene && !Globals.TransitionState)
         {
-            _sceneManager.SwitchScene(Scenes.STOPTHEFIRE);
+            _sceneManager.SwitchScene(Scenes.StopDemonsFromHell);
             Globals.SwitchScene = false;
         }
 

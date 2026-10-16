@@ -3,3 +3,6 @@ obj/
 *.exe
 *.dll
 *.pdb
+# .NET Build Output
+[Bb]in/
+[Oo]bj/
