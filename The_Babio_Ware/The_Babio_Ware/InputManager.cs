@@ -10,6 +10,7 @@ public static class InputManager
     public static MouseState lastMouse;
     public static MouseState mouse;
 
+    public static Vector2 MouseDelta => new Vector2(mouse.X - lastMouse.X, mouse.Y - lastMouse.Y);
     public static Point MousePosition => new Point(mouse.X, mouse.Y);
     public static FloatingPointRectangle MouseHitbox => new(mouse.X, mouse.Y, 10, 10);
 
