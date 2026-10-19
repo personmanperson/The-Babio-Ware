@@ -49,7 +49,7 @@ public class SplashSprite
 
     public virtual void Update()
     {
-        Rectangle mouseRect = new Rectangle(InputManager.MousePosition.X, InputManager.MousePosition.Y, 1, 1);
+        FloatingPointRectangle mouseRect = new FloatingPointRectangle(InputManager.MousePosition.X, InputManager.MousePosition.Y, 1, 1);
 
         if (mouseRect.Intersects(_rect))
         {

@@ -14,9 +14,11 @@ public class Button
     private Vector2 _origin;
     private Color _curColor = Color.White;
     public bool IsClicked = false;
-    public bool IsHovered => _curColor == Color.DarkGray;
+    public bool IsHovered = false;
     public float spriteScale = 1f;
     public float _rotation = 0f;
+
+    private FloatingPointRectangle scaled => new(_pos.X - _origin.X * spriteScale, _pos.Y - _origin.Y * spriteScale, _tex.Width * spriteScale, _tex.Height * spriteScale);
 
     public Button(Texture2D tex, Vector2 pos, float scale = 1f)
     {
@@ -30,11 +32,12 @@ public class Button
 
     public virtual void Update()
     {
-        Rectangle mouseRect = new Rectangle(InputManager.MousePosition.X, InputManager.MousePosition.Y, 1, 1);
-
-        if (mouseRect.Intersects(_rect))
+        FloatingPointRectangle mouseRect = new(InputManager.MousePosition, 1f, 1f);
+        if (mouseRect.IntersectsFloating(scaled))
         {
+            IsHovered = true;
             _curColor = Color.DarkGray; //Grey
+            Console.WriteLine("Hovered");
             if (InputManager.lmb == ButtonState.Pressed)
             {
                 IsClicked = true;
@@ -47,12 +50,17 @@ public class Button
         }
         else
         {
+            
+            IsHovered = false;
             _curColor = Color.White;
         }
     }
 
-    public virtual void Draw(SpriteBatch sb)
+    public virtual void Draw(SpriteBatch sb, Color? color = null)
     {
-        sb.Draw(_tex, _pos, null, _curColor, _rotation, _origin, spriteScale, SpriteEffects.None, 0f);
+        if (!color.HasValue)
+            color = _curColor;
+
+        sb.Draw(_tex, _pos, null, color.Value, _rotation, _origin, spriteScale, SpriteEffects.None, 0f);
     }
 }

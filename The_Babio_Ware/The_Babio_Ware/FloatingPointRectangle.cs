@@ -25,6 +25,14 @@ public struct FloatingPointRectangle
         Height = height;
     }
 
+    public FloatingPointRectangle(Vector2 vector, float width, float height)
+    {
+        X = vector.X;
+        Y = vector.Y;
+        Width = width;
+        Height = height;
+    }
+
     public bool IntersectsXFloating(FloatingPointRectangle other)
     {
         return Left < other.Right &&

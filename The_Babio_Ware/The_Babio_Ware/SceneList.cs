@@ -12,6 +12,6 @@ public enum Scenes
     STOPTHEFIRE,
     JudgeCriminal,
     StopDemonsFromHell,
-    CookFood,
+    BabioPaint,
 }
 

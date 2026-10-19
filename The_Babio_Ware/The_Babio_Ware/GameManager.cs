@@ -47,7 +47,16 @@ public class GameManager
 
         if(Globals.SwitchScene && !Globals.TransitionState)
         {
-            _sceneManager.SwitchScene(Scenes.CookFood);
+            if(Globals.ForceScene.HasValue)
+            {
+                _sceneManager.SwitchScene(Globals.ForceScene.Value);
+                Globals.ForceScene = null;
+            }
+            else
+            {
+                _sceneManager.SwitchScene(Scenes.StopDemonsFromHell);
+            }
+            
             Globals.SwitchScene = false;
         }
 

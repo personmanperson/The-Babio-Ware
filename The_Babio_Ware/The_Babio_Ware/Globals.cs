@@ -14,6 +14,7 @@ public static class Globals
     public static int currentScore = 0;
     public static bool SwitchScene = false;
     public static bool TransitionState = false;
+    public static Scenes? ForceScene = null;
 
     public static int gerberSnacks = 0;
 

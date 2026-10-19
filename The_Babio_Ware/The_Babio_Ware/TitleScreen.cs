@@ -9,6 +9,7 @@ public class TitleScreen(GameManager gameManager) : Scene(gameManager)
 {
     private Texture2D screenTexture;
     public Button startButton;
+    public Button babioPaintButton;
 
     public SplashSprite mj1;
     public SplashSprite mj2;
@@ -27,15 +28,22 @@ public class TitleScreen(GameManager gameManager) : Scene(gameManager)
         mj2 = new(Globals.cm.Load<Texture2D>("MJ-3"), new Vector2(Globals.VirtualWidth / 2 - 625, Globals.VirtualHeight / 2 - 50), 0.4f);
         mj3 = new(Globals.cm.Load<Texture2D>("MJ-3"), new Vector2(Globals.VirtualWidth / 2 - 575, Globals.VirtualHeight / 2 - 50), 0.5f);
         startButton = new Button(Globals.cm.Load<Texture2D>("StartButton"), new Vector2(Globals.VirtualWidth / 2 - 25, Globals.VirtualHeight / 2 - 25), 0.4f);
+        babioPaintButton = new Button(Globals.cm.Load<Texture2D>("PAINT"), new Vector2(Globals.VirtualWidth / 3 - 25, Globals.VirtualHeight / 2 - 25), 0.3f);
     }
 
     public override void Activate()
     {
         Globals.ResetGlobals();
+        startButton.spriteScale = 0.6f;
+        startButton.IsClicked = false;
+        babioPaintButton.spriteScale = 0.5f;
+        babioPaintButton.IsClicked = false;
     }
 
     public override void Deactivate()
-    {}
+    {
+        
+    }
 
     public override void Update()
     {
@@ -65,12 +73,39 @@ public class TitleScreen(GameManager gameManager) : Scene(gameManager)
                 Globals.TransitionState = true;
             }
         }
+
+        if (!babioPaintButton.IsClicked)
+        {
+            if (!babioPaintButton.IsHovered)
+            {
+                babioPaintButton.spriteScale = float.Lerp(babioPaintButton.spriteScale, 0.3f, 0.05f);
+                babioPaintButton._rotation = float.Lerp(babioPaintButton._rotation, sinValue * 0.2f, 0.1f);
+            }
+            else
+            {
+                babioPaintButton.spriteScale = float.Lerp(babioPaintButton.spriteScale, 0.55f, 0.05f);
+                babioPaintButton._rotation = float.Lerp(babioPaintButton._rotation, sinValue * 0.4f, 0.1f);
+            }
+        }
+        else
+        {
+            babioPaintButton.spriteScale = float.Lerp(babioPaintButton.spriteScale, 0.2f, 0.1f);
+            
+            if (babioPaintButton.spriteScale <= 0.22f) 
+            {
+                Globals.currentMinigame = 0;
+                Globals.SwitchScene = true;
+                Globals.TransitionState = true;
+                Globals.ForceScene = Scenes.BabioPaint;
+            }
+        }
         
         mj1._pos.Y = mj2.isHovered? float.Lerp(mj1._pos.Y, mj1._startPos.Y - sinValue * 100, 0.1f) : float.Lerp(mj1._pos.Y, mj1._startPos.Y - sinValue * 10, 0.1f);
         mj2._pos.Y = mj2.isHovered? float.Lerp(mj2._pos.Y, mj1._startPos.Y - sinValue * 100, 0.1f) : float.Lerp(mj1._pos.Y, mj1._startPos.Y - sinValue * 10, 0.1f);
         mj3._pos.Y = mj2.isHovered? float.Lerp(mj3._pos.Y, mj1._startPos.Y - sinValue * 100, 0.1f) : float.Lerp(mj1._pos.Y, mj1._startPos.Y - sinValue * 10, 0.1f);
 
         startButton.Update();
+        babioPaintButton.Update();
         mj1.Update();
         mj2.Update();
         mj3.Update();
@@ -84,5 +119,6 @@ public class TitleScreen(GameManager gameManager) : Scene(gameManager)
         mj2.Draw(Globals.sb, GetColorFromTime(Globals.SinWave * 0.1f, 0f));
         mj3.Draw(Globals.sb, GetColorFromTime(Globals.SinWave * 0.1f, 0f));
         startButton.Draw(Globals.sb);
+        babioPaintButton.Draw(Globals.sb);
     }
 }

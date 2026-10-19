@@ -19,7 +19,7 @@ public class SceneManager
             { Scenes.STOPTHEFIRE, new STOPTHEFIRE(gameManager) },
             { Scenes.JudgeCriminal, new JudgeCriminal(gameManager) },
             { Scenes.StopDemonsFromHell, new StopDemonsFromHell(gameManager) },
-            { Scenes.CookFood, new CookFood(gameManager) },
+            { Scenes.BabioPaint, new BabioPaint(gameManager) }, //Minigame in a minigame, secret title screen
             //{ Scenes.Minigame6, new Minigame6(gameManager) },
             //{ Scenes.Minigame7, new Minigame7(gameManager) },
             //{ Scenes.Minigame8, new Minigame8(gameManager) },
