@@ -13,5 +13,7 @@ public enum Scenes
     JudgeCriminal,
     StopDemonsFromHell,
     BabioPaint,
+    PreschoolMath,
+    
 }
 

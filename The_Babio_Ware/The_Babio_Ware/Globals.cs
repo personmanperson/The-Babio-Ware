@@ -55,6 +55,8 @@ public static class Globals
     public const int VirtualHeight = 1080;
     
     public static Vector2 ScreenCenter => new(VirtualWidth/2, VirtualHeight/2);
+    public static float ScreenCenterValue => ScreenCenter.X + ScreenCenter.Y;
+    public static float Slope => VirtualHeight/VirtualWidth;
 
     public static WindowSettings windowSettings = new WindowSettings() { Width = VirtualWidth, Height = VirtualHeight, Fullscreen = false };
 

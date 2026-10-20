@@ -67,6 +67,7 @@ public class StopDemonsFromHell(GameManager gameManager) : Scene(gameManager)
         return Color.FromHSV(hue * 360.0f, 1.0f, 1.0f); // Convert to degrees for HSV
     }
 
+    public Texture2D screenTexture;
     public Texture2D GunSpriteSheet;
     public List<Texture2D> DemonSpriteSheets = new();
     public List<Demon> Demons;
@@ -92,6 +93,7 @@ public class StopDemonsFromHell(GameManager gameManager) : Scene(gameManager)
     
    public override void Load()
     {
+        screenTexture = Globals.cm.Load<Texture2D>("hell");
         GunSpriteSheet = Globals.cm.Load<Texture2D>("gun");
         Crosshair = new(Globals.cm.Load<Texture2D>("gerberhair"), new(0,0), 0.15f);
         _Anims.AddAnimation(new Vector2(1,0), new(GunSpriteSheet, 0, 5, 0.05f, 6, 1));
@@ -212,6 +214,8 @@ public class StopDemonsFromHell(GameManager gameManager) : Scene(gameManager)
     
    public override void Draw()
     {
+        Globals.sb.Draw(screenTexture, Globals.gd.Viewport.Bounds, Color.White);
+        
         foreach(Demon demon in Demons)
         {
             demon.Draw();

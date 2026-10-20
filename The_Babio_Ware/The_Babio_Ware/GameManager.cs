@@ -54,9 +54,9 @@ public class GameManager
             }
             else
             {
-                _sceneManager.SwitchScene(Scenes.StopDemonsFromHell);
+                _sceneManager.SwitchScene(Scenes.PreschoolMath);
             }
-            
+
             Globals.SwitchScene = false;
         }
 

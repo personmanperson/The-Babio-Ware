@@ -58,6 +58,12 @@ public class Animation
         _frameTimeLeft = _frameTime;
     }
 
+    public void SetFrame(int frame)
+    {
+        _currentFrame = frame;
+        _frameTimeLeft = _frameTime;
+    }
+
     public void Update()
     {
         if (!_isPlaying) return;

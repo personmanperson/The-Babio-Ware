@@ -13,6 +13,19 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin 052014.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:052014.jpg;hell.jpg
+
 #begin 5-2-fly-png-3.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -38,6 +51,19 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:6739-removebg-preview.png;MJ-2.png
+
+#begin b0512e9f320716ee1d834c4e7cf2e852-Sheet-export.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:b0512e9f320716ee1d834c4e7cf2e852-Sheet-export.png;handstuff.png
 
 #begin BabioPaint.png
 /importer:TextureImporter
@@ -208,6 +234,19 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:images-removebg-preview (3).png;gerberhair.png
+
+#begin istockphoto-518673966-612x612.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:istockphoto-518673966-612x612.jpg;stock.jpg
 
 #begin Johan_Liebert_fullbody-removebg-preview.png
 /importer:TextureImporter

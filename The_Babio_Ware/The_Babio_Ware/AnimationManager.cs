@@ -44,6 +44,14 @@ public class AnimationManager
         }
     }
 
+    public void SetFrame(object key, int frame)
+    {
+        if (_anims.ContainsKey(key))
+        {
+            _anims[key].SetFrame(frame);
+        }
+    }
+
     public void Draw(Vector2 pos, SpriteEffects effects = SpriteEffects.None, float rotation = 0f, Color? color = null, Vector2? origin = null, float? scale = null)
     {
         if (!color.HasValue)
@@ -54,5 +62,4 @@ public class AnimationManager
         else    
             _anims[_prevAnimKey].Draw(pos, color.Value, origin.Value, rotation, effects, scale);
     }
-
 }
