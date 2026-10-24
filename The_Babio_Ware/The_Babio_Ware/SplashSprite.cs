@@ -16,7 +16,7 @@ public class SplashSprite
     public float _rotation = 0f;
     public Color defaultColor = Color.White;
     public bool isHovered = false;
-    public bool onTimer;
+    public bool onTimer = false;
     public bool kill = false;
     public float lifeTime;
     public FloatingPointRectangle SCALEDRECT => new(_pos.X - (_origin.X * spriteScale), _pos.Y - (_origin.Y * spriteScale), _tex.Width * spriteScale, _tex.Height * spriteScale);

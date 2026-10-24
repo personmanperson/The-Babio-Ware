@@ -89,6 +89,7 @@ public class StopDemonsFromHell(GameManager gameManager) : Scene(gameManager)
     public float local_et;
     public float total_et; //persists bc lazy
     public bool shot = false;
+    public Song levelAudio;
 
     
    public override void Load()
@@ -108,6 +109,7 @@ public class StopDemonsFromHell(GameManager gameManager) : Scene(gameManager)
         //DemonSpriteSheets.Add(demonTex4);
         gunShot = Globals.cm.Load<SoundEffect>("pew");
         squishShot = Globals.cm.Load<SoundEffect>("squish");
+        levelAudio = Globals.cm.Load<Song>("spook");
     }
 
    public override void Activate()
@@ -119,11 +121,15 @@ public class StopDemonsFromHell(GameManager gameManager) : Scene(gameManager)
         var sheet = Globals.GetRandomItem(DemonSpriteSheets);
         Demon newDemon = new(sheet, Globals.ScreenCenter);
         Demons.Add(newDemon);
+        MediaPlayer.Play(levelAudio);
     }
    
    public override void Deactivate()
     {
-        
+        if (MediaPlayer.State != MediaState.Stopped)
+        {
+            MediaPlayer.Stop();
+        }
     }
 
     private void ShootGun(float minRange, float maxRange) //positive please

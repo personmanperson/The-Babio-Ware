@@ -44,6 +44,12 @@ public class GameManager
             Globals.SwitchScene = false;
         }
 
+        if (InputManager.KeyDown(Keys.F5))
+        {
+            _sceneManager.SwitchScene(Scenes.StopDemonsFromHell);
+            Globals.SwitchScene = false;
+        }
+
 
         if(Globals.SwitchScene && !Globals.TransitionState)
         {

@@ -137,6 +137,19 @@
 /processorParam:Version=3.8.5.1
 /build:download (11).png;green.png
 
+#begin evilpaper.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:evilpaper.jpg;unpapel.jpg
+
 #begin file-removebg-preview.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -397,6 +410,26 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:pngtree-swatted-fly-green-png-image_9969685.png;deadfly.png
+
+#begin pngtree-tossed-crumpled-paper-ball-concept-flat-design-isolated-png-image_15669748.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:pngtree-tossed-crumpled-paper-ball-concept-flat-design-isolated-png-image_15669748.png;papil.png
+
+#begin Slap Battles Halloween Soundtrack (Time- Feel so sleep).mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.5.1
+/build:Slap Battles Halloween Soundtrack (Time- Feel so sleep).mp3;spook.mp3
 
 #begin squish-cut.mp3
 /importer:Mp3Importer

@@ -69,6 +69,12 @@ public static class Globals
         dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
         et = (float)gameTime.TotalGameTime.TotalSeconds;
         SinWave = (float)Math.Sin(et * 2) * 0.5f + 0.5f;
+    }
 
+    public static float sqdist2D(Vector2 a, Vector2 b)
+    {
+        float dx = a.X - b.X;
+	    float dy = a.Y - b.Y;
+	    return dx * dx + dy * dy;	
     }
 }

@@ -50,7 +50,7 @@ public struct FloatingPointRectangle
         return Left < other.Right &&
         Right > other.Left;
     }   
-
+ 
     public bool IntersectsY(Rectangle other)
     {
         return Top < other.Bottom &&

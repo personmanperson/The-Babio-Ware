@@ -37,7 +37,7 @@ public class Button
         {
             IsHovered = true;
             _curColor = Color.DarkGray; //Grey
-            Console.WriteLine("Hovered");
+            //Console.WriteLine("Hovered");
             if (InputManager.lmb == ButtonState.Pressed)
             {
                 IsClicked = true;
