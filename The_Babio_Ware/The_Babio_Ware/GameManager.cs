@@ -41,7 +41,7 @@ public class GameManager
             }
             else
             {
-                _sceneManager.SwitchScene(Scenes.PreschoolMath);
+                _sceneManager.SwitchScene();
             }
         }
 

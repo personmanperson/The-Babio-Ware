@@ -50,12 +50,6 @@ public static class Globals
         return list[Random.Next(list.Count)];
     }
 
-    public static Scenes GetRandomScene()
-    {
-        Scenes[] allScenes = Enum.GetValues<Scenes>();
-        return allScenes[Random.Shared.Next(allScenes.Length)];
-    }
-
     
     public const int VirtualWidth = 1920;
     public const int VirtualHeight = 1080;

@@ -37,6 +37,14 @@ public class SceneManager
         _scenes[ActiveScene].Activate();
     }
 
+    public HashSet<Scenes> BannedScenes = new HashSet<Scenes> { Scenes.TitleScreen, Scenes.BabioPaint };
+
+    public Scenes GetRandomScene()
+    {
+        Scenes[] allScenes = Enum.GetValues<Scenes>();
+        return allScenes[Random.Shared.Next(allScenes.Length)];
+    }
+
     public void EndTransition()
     {
         TransitionState = false;
@@ -44,20 +52,12 @@ public class SceneManager
     
     public void RandomScene()
     {
-        QueuedScene = Globals.GetRandomScene();
+        QueuedScene = GetRandomScene();
     }
 
     public void RequestChange(Scenes? scene = null)
     {
-        if(scene.HasValue)
-        {
-            QueuedScene = scene.Value;
-        }
-        else
-        {
-            RandomScene();
-        }
-
+        QueuedScene = !BannedScenes.Contains(scene.Value) ? scene.Value : GetRandomScene();
         TransitionState = true;
         SceneQueued = true;
     }
