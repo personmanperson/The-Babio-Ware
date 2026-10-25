@@ -9,14 +9,13 @@ namespace The_Babio_Ware;
 
 public static class Globals
 {
+    //to be moved into stateManager or gameManager
     public static int currentLives = 10;
     public static int currentMinigame = 0;
     public static int currentScore = 0;
-    public static bool SwitchScene = false;
-    public static bool TransitionState = false;
-    public static Scenes? ForceScene = null;
+        public static int gerberSnacks = 0;
 
-    public static int gerberSnacks = 0;
+    public static Scenes? ForceScene = null;
 
     public static void ResetGlobals()
     {
@@ -25,6 +24,7 @@ public static class Globals
         currentScore = 0;
         gerberSnacks = 0;
     }
+    //up to here
 
     public static RenderTarget2D GetNewRenderTarget()
     {
@@ -48,6 +48,12 @@ public static class Globals
             throw new ArgumentException("List cannot be null or empty.");
 
         return list[Random.Next(list.Count)];
+    }
+
+    public static Scenes GetRandomScene()
+    {
+        Scenes[] allScenes = Enum.GetValues<Scenes>();
+        return allScenes[Random.Shared.Next(allScenes.Length)];
     }
 
     

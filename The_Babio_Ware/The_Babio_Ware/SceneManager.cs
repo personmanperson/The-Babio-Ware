@@ -9,6 +9,12 @@ public class SceneManager
 {
     public Scenes ActiveScene { get; private set; }
     private readonly Dictionary<Scenes, Scene> _scenes;
+    private Scenes? QueuedScene {get; set;}
+    private bool SceneQueued = false; 
+    public bool NEXTSCENE {get {return SceneQueued;}}
+    private bool TransitionState = false;
+    public bool TRANSITIONSCENE {get {return TransitionState;}}
+
 
     public SceneManager(GameManager gameManager)
     {
@@ -31,17 +37,40 @@ public class SceneManager
         _scenes[ActiveScene].Activate();
     }
 
-    
-    public static void RandomScene()
+    public void EndTransition()
     {
-        
+        TransitionState = false;
+    }
+    
+    public void RandomScene()
+    {
+        QueuedScene = Globals.GetRandomScene();
     }
 
-    public void SwitchScene(Scenes newScene)
+    public void RequestChange(Scenes? scene = null)
+    {
+        if(scene.HasValue)
+        {
+            QueuedScene = scene.Value;
+        }
+        else
+        {
+            RandomScene();
+        }
+
+        TransitionState = true;
+        SceneQueued = true;
+    }
+
+
+    public void SwitchScene(Scenes? newScene = null)
     {
         _scenes[ActiveScene].Deactivate();
-        ActiveScene = newScene;
+        Scenes TargetScene = newScene ?? QueuedScene.Value;
+        ActiveScene = TargetScene;
         _scenes[ActiveScene].Activate();
+        SceneQueued = false;
+        QueuedScene = null;
     }
 
     public void Update()

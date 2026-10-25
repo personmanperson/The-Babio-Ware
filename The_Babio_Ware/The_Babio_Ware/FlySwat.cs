@@ -286,14 +286,14 @@ public class FlySwat(GameManager gameManager) : Scene(gameManager)
         if (levelTimer <= 0 || Points < -5)
         {
             Globals.currentLives -= 1;
-            Globals.TransitionState = true;
-            Globals.SwitchScene = true;
+            //Globals.TransitionState = true;
+            //Globals.SwitchScene = true;
         }
 
         if (Points > win)
         {
-            Globals.TransitionState = true;
-            Globals.SwitchScene = true;
+            //Globals.TransitionState = true;
+            //Globals.SwitchScene = true;
         }
     }
 

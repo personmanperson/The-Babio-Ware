@@ -24,7 +24,7 @@ public class Paper
         paperSheet = Globals.cm.Load<Texture2D>("unpapel");
         paperBall = Globals.cm.Load<Texture2D>("papil");
         curTex = paperSheet;
-        _origin = _origin = new Vector2(curTex.Width / 2, curTex.Height / 2);
+        _origin = new Vector2(curTex.Width / 2, curTex.Height / 2);
         _pos = pos;
     }
 

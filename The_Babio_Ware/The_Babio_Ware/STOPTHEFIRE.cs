@@ -202,14 +202,14 @@ public class STOPTHEFIRE(GameManager gameManager) : Scene(gameManager)
         if (levelTimer <= 0 || Points < -5)
         {
             Globals.currentLives -= 1;
-            Globals.TransitionState = true;
-            Globals.SwitchScene = true;
+            //Globals.TransitionState = true;
+            //Globals.SwitchScene = true;
         }
 
         if (Points >= PointsToWin)
         {
-            Globals.TransitionState = true;
-            Globals.SwitchScene = true;
+            //Globals.TransitionState = true;
+            //Globals.SwitchScene = true;
         }
     }
 

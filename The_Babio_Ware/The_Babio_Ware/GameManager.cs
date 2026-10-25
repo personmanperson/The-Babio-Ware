@@ -9,8 +9,8 @@ namespace The_Babio_Ware;
 
 public class GameManager
 {
-    private readonly SceneManager _sceneManager;
-    private readonly Curtains _curtain;
+    private SceneManager _sceneManager;
+    private Curtains _curtain;
 
     public GameManager()
     {
@@ -18,40 +18,21 @@ public class GameManager
         _curtain = new Curtains();
     }
 
+    public void RequestSceneChange()
+    {
+        _sceneManager.RequestChange();
+    }
+
     public void Update(GameTime gameTime)
     {
         if (InputManager.KeyDown(Keys.F1))
         {
-            _sceneManager.SwitchScene(Scenes.TitleScreen);
-            Globals.SwitchScene = false;
-        }
-
-        if (InputManager.KeyDown(Keys.F2))
-        {
-            _sceneManager.SwitchScene(Scenes.FlySwat);
-            Globals.SwitchScene = false;
-        }
-        
-        if (InputManager.KeyDown(Keys.F3))
-        {
-            _sceneManager.SwitchScene(Scenes.STOPTHEFIRE);
-            Globals.SwitchScene = false;
-        }
-
-        if (InputManager.KeyDown(Keys.F4))
-        {
-            _sceneManager.SwitchScene(Scenes.JudgeCriminal);
-            Globals.SwitchScene = false;
-        }
-
-        if (InputManager.KeyDown(Keys.F5))
-        {
-            _sceneManager.SwitchScene(Scenes.StopDemonsFromHell);
-            Globals.SwitchScene = false;
+            _sceneManager.RequestChange();
+            Globals.ForceScene = Scenes.TitleScreen;
         }
 
 
-        if(Globals.SwitchScene && !Globals.TransitionState)
+        if(_sceneManager.NEXTSCENE && !_sceneManager.TRANSITIONSCENE)
         {
             if(Globals.ForceScene.HasValue)
             {
@@ -62,12 +43,10 @@ public class GameManager
             {
                 _sceneManager.SwitchScene(Scenes.PreschoolMath);
             }
-
-            Globals.SwitchScene = false;
         }
 
         _sceneManager.Update();
-        _curtain.Update();
+        _curtain.Update(_sceneManager);
     }
 
     public void Draw(SpriteBatch spriteBatch)

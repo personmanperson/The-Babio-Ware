@@ -47,7 +47,7 @@ public class BabioPaint(GameManager gameManager) : Scene(gameManager)
             float dist = Vector2.Distance(A, B);
             float step = 4f; //this is a constant but I HATE you guys, so it's an EVIL constant, so it will forever stay inside the update loop
             
-            for(float d = 0; d < dist; d += step)
+            for(float d = 0; d < dist; d += step) 
             {
                 float p = d/dist;
 

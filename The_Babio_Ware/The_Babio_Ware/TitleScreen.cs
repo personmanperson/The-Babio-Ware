@@ -69,8 +69,7 @@ public class TitleScreen(GameManager gameManager) : Scene(gameManager)
             if (startButton.spriteScale <= 0.32f) 
             {
                 Globals.currentMinigame = 0;
-                Globals.SwitchScene = true;
-                Globals.TransitionState = true;
+                gameManager.RequestSceneChange();
             }
         }
 
@@ -94,9 +93,8 @@ public class TitleScreen(GameManager gameManager) : Scene(gameManager)
             if (babioPaintButton.spriteScale <= 0.22f) 
             {
                 Globals.currentMinigame = 0;
-                Globals.SwitchScene = true;
-                Globals.TransitionState = true;
-                Globals.ForceScene = Scenes.BabioPaint;
+                gameManager.RequestSceneChange();
+                Globals.ForceScene = Scenes.BabioPaint; //minigame !!!
             }
         }
         

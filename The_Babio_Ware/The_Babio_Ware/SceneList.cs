@@ -14,6 +14,5 @@ public enum Scenes
     StopDemonsFromHell,
     BabioPaint,
     PreschoolMath,
-    
 }
 

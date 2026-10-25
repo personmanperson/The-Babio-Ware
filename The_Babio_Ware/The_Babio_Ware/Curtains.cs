@@ -17,13 +17,13 @@ public class Curtains
         curtainTextureRight = new(Globals.cm.Load<Texture2D>("curtain"), new Vector2(Globals.VirtualWidth, Globals.VirtualHeight / 2.2f), 1.5f);
     }
 
-    public void Update()
+    public void Update(SceneManager _sceneManager)
     {
-        if (Globals.TransitionState == true)
+        if (_sceneManager.TRANSITIONSCENE == true)
         {
             slightDelay = 0.1f;
             bool closed = MathF.Abs(Globals.VirtualWidth/2 - curtainTextureLeft._pos.X) < 460;
-            if (closed) {Globals.TransitionState = false;}
+            if (closed) {_sceneManager.EndTransition();}
             else {curtainTextureLeft._pos.X = float.Lerp(curtainTextureLeft._pos.X, Globals.VirtualWidth/3.8f, 0.14f);
             curtainTextureRight._pos.X = float.Lerp(curtainTextureRight._pos.X, Globals.VirtualWidth - Globals.VirtualWidth/3.8f, 0.14f);}
         }
