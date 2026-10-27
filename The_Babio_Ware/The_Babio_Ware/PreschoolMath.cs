@@ -17,15 +17,16 @@ public class Paper
     public float spriteScale = 1f;
     private Vector2 _origin;
     public FloatingPointRectangle rect => new(_pos.X - (_origin.X * spriteScale), _pos.Y - (_origin.Y * spriteScale), curTex.Width * spriteScale, curTex.Height * spriteScale);
+    public int value;
 
-
-    public Paper(Vector2 pos)
+    public Paper(Vector2 pos, int value = 0)
     {
         paperSheet = Globals.cm.Load<Texture2D>("unpapel");
         paperBall = Globals.cm.Load<Texture2D>("papil");
         curTex = paperSheet;
         _origin = new Vector2(curTex.Width / 2, curTex.Height / 2);
         _pos = pos;
+        this.value = value;
     }
 
     public void Youcanreallynamefunctionsanythigyouwantitdoesntmatter()
@@ -38,7 +39,6 @@ public class Paper
 
     public void Draw()
     {
-        Console.WriteLine("drw");
         Globals.sb.Draw(curTex, _pos, null, Color.White, 0f, _origin, spriteScale, SpriteEffects.None, 0);
     }
 }
@@ -72,10 +72,11 @@ public class PreschoolMath(GameManager gameManager) : Scene(gameManager)
         float spacing = (float)Globals.VirtualWidth / (loops + 1); //"linear algebra" grr
         for(int i = 0; i < loops; i++)
         {
+            int next = Globals.Random.Next(1, 31);
             float xPos = spacing * (i + 1); //algebros 
-            var paper = new Paper(new(xPos, Globals.VirtualHeight/2));
+            var paper = new Paper(new(xPos, Globals.VirtualHeight/2), next);
             papers.Add(paper);
-            needed += Globals.Random.Next(15, 31);
+            needed += next;
         }
     }
 

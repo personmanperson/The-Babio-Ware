@@ -9,6 +9,8 @@ public class SceneManager
 {
     public Scenes ActiveScene { get; private set; }
     private readonly Dictionary<Scenes, Scene> _scenes;
+    private bool isSearchingForScene = false;
+    public bool ISSEARCHINGFORSCENE {get {return isSearchingForScene;}}
     private Scenes? QueuedScene {get; set;}
     private bool SceneQueued = false; 
     public bool NEXTSCENE {get {return SceneQueued;}}
@@ -25,7 +27,7 @@ public class SceneManager
             { Scenes.STOPTHEFIRE, new STOPTHEFIRE(gameManager) },
             { Scenes.JudgeCriminal, new JudgeCriminal(gameManager) },
             { Scenes.StopDemonsFromHell, new StopDemonsFromHell(gameManager) },
-            { Scenes.BabioPaint, new BabioPaint(gameManager) }, //Minigame in a minigame, secret title screen
+            { Scenes.BabioPaint, new BabioPaint(gameManager) }, //Minigame in a minigame, title screen secret
             { Scenes.PreschoolMath, new PreschoolMath(gameManager) },
             //{ Scenes.Minigame7, new Minigame7(gameManager) },
             //{ Scenes.Minigame8, new Minigame8(gameManager) },
@@ -50,18 +52,31 @@ public class SceneManager
         TransitionState = false;
     }
     
-    public void RandomScene()
+    public Scenes GetUnbannedRandomScene()
     {
-        QueuedScene = GetRandomScene();
+        isSearchingForScene = true;
+        Scenes next;
+        do {
+            next = GetRandomScene();
+        } while (BannedScenes.Contains(next));
+        isSearchingForScene = false;
+        return next;
     }
 
     public void RequestChange(Scenes? scene = null)
     {
-        QueuedScene = !BannedScenes.Contains(scene.Value) ? scene.Value : GetRandomScene();
         TransitionState = true;
+        QueuedScene = scene.HasValue && !BannedScenes.Contains(scene.Value) ? scene.Value : GetUnbannedRandomScene();
         SceneQueued = true;
     }
 
+    public void ForceChange(Scenes scene)
+    {
+        TransitionState = true;
+        QueuedScene = scene;
+        Console.WriteLine($"Force changing to scene: {scene}");
+        SceneQueued = true;
+    }
 
     public void SwitchScene(Scenes? newScene = null)
     {

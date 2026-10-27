@@ -23,7 +23,7 @@ public class Curtains
         {
             slightDelay = 0.1f;
             bool closed = MathF.Abs(Globals.VirtualWidth/2 - curtainTextureLeft._pos.X) < 460;
-            if (closed) {_sceneManager.EndTransition();}
+            if (closed &&! _sceneManager.ISSEARCHINGFORSCENE) {_sceneManager.EndTransition();}
             else {curtainTextureLeft._pos.X = float.Lerp(curtainTextureLeft._pos.X, Globals.VirtualWidth/3.8f, 0.14f);
             curtainTextureRight._pos.X = float.Lerp(curtainTextureRight._pos.X, Globals.VirtualWidth - Globals.VirtualWidth/3.8f, 0.14f);}
         }

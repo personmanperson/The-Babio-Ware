@@ -13,9 +13,7 @@ public static class Globals
     public static int currentLives = 10;
     public static int currentMinigame = 0;
     public static int currentScore = 0;
-        public static int gerberSnacks = 0;
-
-    public static Scenes? ForceScene = null;
+    public static int gerberSnacks = 0;
 
     public static void ResetGlobals()
     {
@@ -50,7 +48,6 @@ public static class Globals
         return list[Random.Next(list.Count)];
     }
 
-    
     public const int VirtualWidth = 1920;
     public const int VirtualHeight = 1080;
     

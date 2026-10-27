@@ -15,6 +15,8 @@ public class TitleScreen(GameManager gameManager) : Scene(gameManager)
     public SplashSprite mj2;
     public SplashSprite mj3;
 
+    private bool isTransitioning = false;
+
     public Color GetColorFromTime(float time, float offset)
     {
         float hue = (time + offset) % 1.0f; // Ensure hue is in the range [0, 1]
@@ -38,6 +40,7 @@ public class TitleScreen(GameManager gameManager) : Scene(gameManager)
         startButton.IsClicked = false;
         babioPaintButton.spriteScale = 0.5f;
         babioPaintButton.IsClicked = false;
+        isTransitioning = false;
     }
 
     public override void Deactivate()
@@ -66,10 +69,11 @@ public class TitleScreen(GameManager gameManager) : Scene(gameManager)
         {
             startButton.spriteScale = float.Lerp(startButton.spriteScale, 0.3f, 0.1f);
             
-            if (startButton.spriteScale <= 0.32f) 
+            if (startButton.spriteScale <= 0.32f && !isTransitioning) 
             {
                 Globals.currentMinigame = 0;
                 gameManager.RequestSceneChange();
+                isTransitioning = true;
             }
         }
 
@@ -90,11 +94,11 @@ public class TitleScreen(GameManager gameManager) : Scene(gameManager)
         {
             babioPaintButton.spriteScale = float.Lerp(babioPaintButton.spriteScale, 0.2f, 0.1f);
             
-            if (babioPaintButton.spriteScale <= 0.22f) 
+            if (babioPaintButton.spriteScale <= 0.22f && !isTransitioning) 
             {
                 Globals.currentMinigame = 0;
-                gameManager.RequestSceneChange();
-                Globals.ForceScene = Scenes.BabioPaint; //minigame !!!
+                gameManager.ForceSceneChange(Scenes.BabioPaint);
+                isTransitioning = true;
             }
         }
         
@@ -117,6 +121,8 @@ public class TitleScreen(GameManager gameManager) : Scene(gameManager)
         mj2.Draw(Globals.sb, GetColorFromTime(Globals.SinWave * 0.1f, 0f));
         mj3.Draw(Globals.sb, GetColorFromTime(Globals.SinWave * 0.1f, 0f));
         startButton.Draw(Globals.sb);
+        Globals.sb.DrawString(Game1.font, "Play", new Vector2(startButton.Rect.X, startButton.Rect.Bottom), Color.Black, 0f, Game1.font.MeasureString("Play") / 2, 5, SpriteEffects.None, 0f);
         babioPaintButton.Draw(Globals.sb);
+        Globals.sb.DrawString(Game1.font, "Babio Paint", new Vector2(babioPaintButton.Rect.X, babioPaintButton.Rect.Bottom), Color.Black, 0f, Game1.font.MeasureString("Babio Paint") / 2, 3, SpriteEffects.None, 0f);
     }
 }

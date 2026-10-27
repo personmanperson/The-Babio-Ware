@@ -18,28 +18,21 @@ public class GameManager
         _curtain = new Curtains();
     }
 
-    public void RequestSceneChange()
-    {
-        _sceneManager.RequestChange();
-    }
+    public void RequestSceneChange(Scenes? scene = null)
+    { _sceneManager.RequestChange(scene);}
+
+    public void ForceSceneChange(Scenes scene)
+    { _sceneManager.ForceChange(scene);}
 
     public void Update(GameTime gameTime)
     {
-        if (InputManager.KeyDown(Keys.F1))
+        if (InputManager.KeyPressed(Keys.F1))
         {
-            _sceneManager.RequestChange();
-            Globals.ForceScene = Scenes.TitleScreen;
+            ForceSceneChange(Scenes.TitleScreen);
         }
-
 
         if(_sceneManager.NEXTSCENE && !_sceneManager.TRANSITIONSCENE)
         {
-            if(Globals.ForceScene.HasValue)
-            {
-                _sceneManager.SwitchScene(Globals.ForceScene.Value);
-                Globals.ForceScene = null;
-            }
-            else
             {
                 _sceneManager.SwitchScene();
             }
@@ -54,7 +47,7 @@ public class GameManager
         var frame = _sceneManager.GetFrame();
 
         spriteBatch.Begin();
-        Globals.sb.Draw(frame, new Rectangle(0, 0, Globals.VirtualWidth, Globals.VirtualHeight), Color.White);
+        Globals.sb.Draw(frame, new Rectangle(0, 0, Globals.VirtualWidth, Globals.VirtualHeight), Color.White);        
         _curtain.Draw();
         spriteBatch.End();
     }

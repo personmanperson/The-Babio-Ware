@@ -92,7 +92,7 @@ public class BabioPaint(GameManager gameManager) : Scene(gameManager)
             float size = MathHelper.Clamp(12f / safeSpeed, 4f, 12f);
 
             for(int i = 0; i < points.Count; i++)
-            {
+            { //it's like he never even existed, that j.
                 for(int k = i+1; k < points.Count; k++)
                 {
                     Vector2 p1 = points[i];

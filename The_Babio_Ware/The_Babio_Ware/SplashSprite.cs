@@ -49,9 +49,7 @@ public class SplashSprite
 
     public virtual void Update()
     {
-        FloatingPointRectangle mouseRect = new FloatingPointRectangle(InputManager.MousePosition.X, InputManager.MousePosition.Y, 1, 1);
-
-        if (mouseRect.Intersects(_rect))
+        if (InputManager.MouseHitbox.Intersects(_rect))
         {
             isHovered = true;
         }

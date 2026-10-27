@@ -10,6 +10,7 @@ public class Button
 {
     private readonly Texture2D _tex;
     private Vector2 _pos;
+    public Vector2 POS {get {return _pos;}}
     private Rectangle _rect;
     private Vector2 _origin;
     private Color _curColor = Color.White;
@@ -19,6 +20,7 @@ public class Button
     public float _rotation = 0f;
 
     private FloatingPointRectangle scaled => new(_pos.X - _origin.X * spriteScale, _pos.Y - _origin.Y * spriteScale, _tex.Width * spriteScale, _tex.Height * spriteScale);
+    public FloatingPointRectangle Rect {get {return scaled;}}
 
     public Button(Texture2D tex, Vector2 pos, float scale = 1f)
     {
