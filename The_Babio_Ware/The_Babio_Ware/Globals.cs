@@ -48,6 +48,14 @@ public static class Globals
         return list[Random.Next(list.Count)];
     }
 
+    public static T GetRandomItem<T>(T[] array)
+    {
+        if (array == null || array.Length == 0)
+            throw new ArgumentException("Array cannot be null or empty.");
+
+        return array[Random.Next(array.Length)];
+    }
+
     public const int VirtualWidth = 1920;
     public const int VirtualHeight = 1080;
     

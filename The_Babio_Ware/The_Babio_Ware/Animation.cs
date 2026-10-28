@@ -68,7 +68,7 @@ public class Animation
     {
         if (!_isPlaying) return;
 
-        _frameTimeLeft -= Globals.dt;
+        _frameTimeLeft -= Globals.dt * SceneManager.SpeedScale; // SCALE IT
 
         if (_frameTimeLeft <= 0)
         {

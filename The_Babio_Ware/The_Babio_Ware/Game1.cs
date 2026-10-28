@@ -42,7 +42,7 @@ public class Game1 : Game
         fontTexture = Content.Load<Texture2D>("font");
 
         var characterMap = new Dictionary<char, Rectangle>();
-        string imageLayout = @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:'"",.<>?/`~ ";
+        string imageLayout = @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!""#$%&'()*+,─./:;<=>?@[\]^_`{}~-";
 
         for (int i = 0; i < imageLayout.Length; i++)
         {
@@ -50,13 +50,14 @@ public class Game1 : Game
 
             if (characterMap.ContainsKey(c)) continue;
 
-            int x = i % (fontTexture.Width / 8) * 8;
-            int y = i / (fontTexture.Width / 8) * 8;
+            int x = i % (fontTexture.Width / 32) * 32;
+            int y = i / (fontTexture.Width / 32) * 32;
 
-            characterMap[c] = new Rectangle(x, y, 8, 8);
+            characterMap[c] = new Rectangle(x, y, 32, 32);
             
         }
 
+        characterMap[' '] = new Rectangle(0, 0, 0, 0); 
         var characters = new List<char>(characterMap.Keys);
         characters.Sort();
 
@@ -67,11 +68,11 @@ public class Game1 : Game
         foreach (char c in characters)
         {
             glyphs.Add(characterMap[c]);
-            cropping.Add(new Rectangle(0, 0, 8, 8));
-            kerning.Add(new Vector3(0, 0, 8));
+            cropping.Add(new Rectangle(0, 0, 32, 32));
+            kerning.Add(new Vector3(0, 0, 22));
         }
 
-        font = new SpriteFont(fontTexture, glyphs, cropping, characters, 8, 0f, kerning, '?');
+        font = new SpriteFont(fontTexture, glyphs, cropping, characters, 0, 0f, kerning, '?');
 
         DebugPixel = new Texture2D(GraphicsDevice, 1, 1);
         DebugPixel.SetData(new[] {Color.White});

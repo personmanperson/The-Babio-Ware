@@ -21,6 +21,7 @@ public class SplashSprite
     public float lifeTime;
     public FloatingPointRectangle SCALEDRECT => new(_pos.X - (_origin.X * spriteScale), _pos.Y - (_origin.Y * spriteScale), _tex.Width * spriteScale, _tex.Height * spriteScale);
     public Vector2 velocity = new(0,0); //this will be used like once
+    public Vector2 center => new(_pos.X - (_origin.X * spriteScale), _pos.Y - (_origin.Y * spriteScale));
 
 
     public SplashSprite(Texture2D tex, Vector2 pos, float scale = 1f)

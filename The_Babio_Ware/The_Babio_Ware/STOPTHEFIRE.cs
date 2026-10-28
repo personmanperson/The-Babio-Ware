@@ -22,7 +22,7 @@ public class FIRE
     {
         if (!extinguished)
         {
-            sprite.spriteScale += Globals.dt;
+            sprite.spriteScale += Globals.dt * SceneManager.SpeedScale;
         }
     }
 
@@ -78,7 +78,7 @@ public class STOPTHEFIRE(GameManager gameManager) : Scene(gameManager)
         local_et = 0;
         startupTime = 1;
         firesExtinguished = 0;
-        levelTimer = 7f;
+        levelTimer = 11f;
         PointsToWin = Globals.Random.Next(7,13);
         Points = 0;
         startBurstUsed = false;
@@ -114,32 +114,18 @@ public class STOPTHEFIRE(GameManager gameManager) : Scene(gameManager)
     public override void Update()
     {
         wateringCanUsed = false;
-        local_et += Globals.dt;
-        startupTime -= Globals.dt;
-        levelTimer -= Globals.dt;
+        local_et += Globals.dt * SceneManager.SpeedScale;
+        startupTime -= Globals.dt * SceneManager.SpeedScale;
+        levelTimer -= Globals.dt * SceneManager.SpeedScale;
 
         if(!startBurstUsed && startupTime <= 0)
         {   
             startBurstUsed = true;
-            int randAmt = Globals.Random.Next(4, 7);
-            for(int i = 0; i < randAmt; i++)
+            for(int i = 0; i < PointsToWin + 2; i++)
             {
                 int randPos = Globals.Random.Next(50, Globals.VirtualWidth - 50);
                 FIRE newFire = new (fireTex, new(randPos, Globals.VirtualHeight/1.3f), 1);
                 fires.Add(newFire);
-            }
-        }
-
-        if (local_et >= 1.1 && startupTime <= 0)
-        {   
-            local_et = 0;
-            int randAmt = Globals.Random.Next(1, 5);
-            for(int i = 0; i < randAmt; i++)
-            {
-                int randPos = Globals.Random.Next(50, Globals.VirtualWidth - 50);
-                FIRE newFire = new (fireTex, new(randPos, Globals.VirtualHeight/1.3f), 1);
-                fires.Add(newFire);
-                //newFire.sprite.spriteScale = 0.1f;
             }
         }
 
@@ -155,15 +141,15 @@ public class STOPTHEFIRE(GameManager gameManager) : Scene(gameManager)
 
         foreach (SplashSprite smoke in steams)
         {
-            smoke._pos.Y -= 100f * Globals.dt;
+            smoke._pos.Y -= 100f * Globals.dt * SceneManager.SpeedScale;
             smoke.defaultColor *= 0.99f;
-            smoke.lifeTime -= Globals.dt;
+            smoke.lifeTime -= Globals.dt * SceneManager.SpeedScale;
         }
 
         foreach(SplashSprite water in droplets)
         {
             if(water.kill == true){continue;}
-            water._pos.Y += 1000f * Globals.dt;
+            water._pos.Y += 1000f * Globals.dt * SceneManager.SpeedScale;
             if(water._pos.Y > Globals.VirtualHeight)
             {
                 water.kill = true;
@@ -199,17 +185,19 @@ public class STOPTHEFIRE(GameManager gameManager) : Scene(gameManager)
         );
         steams.RemoveAll(smoke => smoke.lifeTime <= 0);
 
-        if (levelTimer <= 0 || Points < -5)
+        if (levelTimer <= 0 && !gameManager.currentGameEnd || Points < -5 && !gameManager.currentGameEnd)
         {
             Globals.currentLives -= 1;
-            //Globals.TransitionState = true;
-            //Globals.SwitchScene = true;
+            gameManager.currentGameEnd = true;
+            Console.WriteLine("Lost: STOPTHEFIRE");
+            gameManager.RequestSceneChange();
         }
 
-        if (Points >= PointsToWin)
+        if (Points >= PointsToWin && fires.Count == 0 && !gameManager.currentGameEnd)
         {
-            //Globals.TransitionState = true;
-            //Globals.SwitchScene = true;
+            gameManager.currentGameEnd = true;
+            Console.WriteLine("Won: STOPTHEFIRE");
+            gameManager.RequestSceneChange();
         }
     }
 

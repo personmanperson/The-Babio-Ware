@@ -7,6 +7,8 @@ namespace The_Babio_Ware;
 
 public class SceneManager
 {
+    public static float SpeedScale = 1f;
+    private int gamesWon = 0;
     public Scenes ActiveScene { get; private set; }
     private readonly Dictionary<Scenes, Scene> _scenes;
     private bool isSearchingForScene = false;
@@ -39,8 +41,8 @@ public class SceneManager
         _scenes[ActiveScene].Activate();
     }
 
-    public HashSet<Scenes> BannedScenes = new HashSet<Scenes> { Scenes.TitleScreen, Scenes.BabioPaint };
-
+    public HashSet<Scenes> BannedScenes = new HashSet<Scenes> { Scenes.TitleScreen, Scenes.BabioPaint, Scenes.PreschoolMath }; // Add any scenes you want to ban here
+    //some banned scenes are temporary bans, because they don't have a win condition, or are not fully implemented yet. Some are permanent bans, like the title screen and babio paint, minigames or not meant to be yet
     public Scenes GetRandomScene()
     {
         Scenes[] allScenes = Enum.GetValues<Scenes>();
@@ -61,20 +63,26 @@ public class SceneManager
         } while (BannedScenes.Contains(next));
         isSearchingForScene = false;
         return next;
-    }
+    } //eventually I'll stop it from doing the same scene twice, or even like 5 scenes back, always a more fresh scene
 
     public void RequestChange(Scenes? scene = null)
     {
         TransitionState = true;
         QueuedScene = scene.HasValue && !BannedScenes.Contains(scene.Value) ? scene.Value : GetUnbannedRandomScene();
         SceneQueued = true;
+        gamesWon++;
+        if(gamesWon > 0 && gamesWon % 2 == 0)
+        {
+            SpeedScale += 0.001f;
+        }
     }
 
     public void ForceChange(Scenes scene)
     {
         TransitionState = true;
         QueuedScene = scene;
-        Console.WriteLine($"Force changing to scene: {scene}");
+        Console.WriteLine($"Force changing to scene: {scene}"); //these return to title or minigame (or boss?), we can safely reset speed scale !!!
+        SpeedScale = 1f;
         SceneQueued = true;
     }
 

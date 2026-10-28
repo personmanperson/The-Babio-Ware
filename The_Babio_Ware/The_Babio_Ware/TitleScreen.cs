@@ -15,6 +15,77 @@ public class TitleScreen(GameManager gameManager) : Scene(gameManager)
     public SplashSprite mj2;
     public SplashSprite mj3;
 
+    private string[]  startMessages= new string[]
+    {
+        "Start",
+        "Start",
+        "Start",
+        "Start",
+        "Start",
+        "Start",
+        "Start",
+        "Start",
+        "Start",
+        "Start",
+        "Start",
+        "Start",
+        "Start",
+        "Start",
+        "Start",
+        "Start",
+        "Start",
+        "Start",
+        "Begin",
+        "Play",
+        "Go",
+        "Launch",
+        "Commence",
+        "Activate",
+        "Engage",
+        "Initiate",
+        "Proceed",
+        "russlan is didi",
+        "now with 10% less phonk",
+        "press [null] to start",
+        "man without a body or a nose",
+        "NO original music",
+        "DONT press",
+        "hi!!!!!",
+        "press start to press start",
+        "hold me to start",
+        "hold!",
+        "press start to start",
+        "some original music",
+        "why is the start menu quiet?",
+        "do I upset you?",
+        "press start to start the game",
+        "boo!",
+        "my favorite instrument is the piano",
+        "gameManager.RequestSceneChange()",
+        "hola",
+        "bonjour",
+        "ciao",
+        "hallo",
+        "konnichiwa",
+        "hello in english",
+        "babio soon",
+        "babio not paint?",
+        "michael jackson button!?!",
+        "free API keys!!!",
+        "squids = clones",
+        "clones = squids",
+        "Secret message",
+        "less secret message",
+        "less secret message 2",
+        "less secret message 3",
+        "less secret message 4",
+        "less secret message 5",
+        "least secret message",
+        "fatal error, deleting all system files",
+    };
+
+    private string startMessage = "This is a fatal fallback message if this ever shows up on your screen rip lmao";
+
     private bool isTransitioning = false;
 
     public Color GetColorFromTime(float time, float offset)
@@ -41,6 +112,8 @@ public class TitleScreen(GameManager gameManager) : Scene(gameManager)
         babioPaintButton.spriteScale = 0.5f;
         babioPaintButton.IsClicked = false;
         isTransitioning = false;
+
+        startMessage = startMessages[Globals.Random.Next(0, startMessages.Length)];
     }
 
     public override void Deactivate()
@@ -111,7 +184,6 @@ public class TitleScreen(GameManager gameManager) : Scene(gameManager)
         mj1.Update();
         mj2.Update();
         mj3.Update();
-
     }
 
     public override void Draw()
@@ -121,8 +193,8 @@ public class TitleScreen(GameManager gameManager) : Scene(gameManager)
         mj2.Draw(Globals.sb, GetColorFromTime(Globals.SinWave * 0.1f, 0f));
         mj3.Draw(Globals.sb, GetColorFromTime(Globals.SinWave * 0.1f, 0f));
         startButton.Draw(Globals.sb);
-        Globals.sb.DrawString(Game1.font, "Play", new Vector2(startButton.Rect.X, startButton.Rect.Bottom), Color.Black, 0f, Game1.font.MeasureString("Play") / 2, 5, SpriteEffects.None, 0f);
         babioPaintButton.Draw(Globals.sb);
-        Globals.sb.DrawString(Game1.font, "Babio Paint", new Vector2(babioPaintButton.Rect.X, babioPaintButton.Rect.Bottom), Color.Black, 0f, Game1.font.MeasureString("Babio Paint") / 2, 3, SpriteEffects.None, 0f);
+        Globals.sb.DrawString(Game1.font, startMessage, new Vector2(startButton.Rect.X + startButton.Rect.Width/2, startButton.Rect.Bottom), Color.Black, Globals.SinWave * 0.0001f, Game1.font.MeasureString(startMessage)/ 2, 3 * startButton.spriteScale, SpriteEffects.None, 0f);
+        Globals.sb.DrawString(Game1.font, "Babio Paint", new Vector2(babioPaintButton.Rect.X + babioPaintButton.Rect.Width/2, babioPaintButton.Rect.Top), Color.Black, Globals.SinWave * 0.1f, Game1.font.MeasureString("Babio Paint") / 2, 2.4f * babioPaintButton.spriteScale, SpriteEffects.None, 0f);
     }
 }

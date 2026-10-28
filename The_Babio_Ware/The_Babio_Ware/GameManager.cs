@@ -11,6 +11,7 @@ public class GameManager
 {
     private SceneManager _sceneManager;
     private Curtains _curtain;
+    public bool currentGameEnd = false;
 
     public GameManager()
     {
@@ -35,6 +36,7 @@ public class GameManager
         {
             {
                 _sceneManager.SwitchScene();
+                currentGameEnd = false;
             }
         }
 

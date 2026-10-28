@@ -52,7 +52,7 @@
 /processorParam:Version=3.8.5.1
 /build:6739-removebg-preview.png;MJ-2.png
 
-#begin 8x8 Wide Spritesheet.png
+#begin alphabet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -63,7 +63,7 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
-/build:8x8 Wide Spritesheet.png;font.png
+/build:alphabet.png;font.png
 
 #begin b0512e9f320716ee1d834c4e7cf2e852-Sheet-export.png
 /importer:TextureImporter

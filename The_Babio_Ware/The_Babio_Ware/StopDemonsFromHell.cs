@@ -42,12 +42,12 @@ public class Demon
 
         if(!vanquishedkilleddeadwhatisitcalled)
         {
-            scale = MathHelper.Clamp(scale + 0.005f, -0.001f, 3f);
+            scale = MathHelper.Clamp(scale + 0.005f * SceneManager.SpeedScale, -0.001f, 3f);
         }
         else
         {
-            scale = MathHelper.Clamp(scale - 0.005f, 0.001f, 3f);
-            deadtimer -= Globals.dt;
+            scale = MathHelper.Clamp(scale - 0.005f * SceneManager.SpeedScale, 0.001f, 3f);
+            deadtimer -= Globals.dt * SceneManager.SpeedScale;
         }
     }
 
@@ -77,6 +77,8 @@ public class StopDemonsFromHell(GameManager gameManager) : Scene(gameManager)
     public Vector2 gunOrigin;
     public SoundEffect gunShot;
     public SoundEffect squishShot;
+
+    public int demonDeathCount = 0;
 
     public readonly float CD = 0.31f;
     public readonly float Shot = 0.3f;
@@ -149,10 +151,10 @@ public class StopDemonsFromHell(GameManager gameManager) : Scene(gameManager)
 
    public override void Update()
     {
-        total_et += Globals.dt;
-        local_et += Globals.dt;
+        total_et += Globals.dt * SceneManager.SpeedScale;
+        local_et += Globals.dt * SceneManager.SpeedScale;
 
-        if (local_et >= 0.2f)
+        if (local_et >= 0.08f)
         {
             local_et = 0f;
             var sheet = Globals.GetRandomItem(DemonSpriteSheets);
@@ -161,9 +163,9 @@ public class StopDemonsFromHell(GameManager gameManager) : Scene(gameManager)
         }
 
         Crosshair._pos = new(InputManager.mouse.X, InputManager.mouse.Y);
-        timer -= Globals.dt;
-        timer2 -= Globals.dt;
-        secretTimer -= Globals.dt;
+        timer -= Globals.dt * SceneManager.SpeedScale;
+        timer2 -= Globals.dt * SceneManager.SpeedScale;
+        secretTimer -= Globals.dt * SceneManager.SpeedScale;
         
         if (InputManager.rmbClick && SuperCharge)
         {
@@ -212,10 +214,16 @@ public class StopDemonsFromHell(GameManager gameManager) : Scene(gameManager)
 
         Demons.RemoveAll(demon => 
             { 
-                if (demon.deadtimer <= 0) {Console.WriteLine("Wow! an accomplishment.");}
+                if (demon.deadtimer <= 0) {demonDeathCount++;}
                 return demon.deadtimer <= 0;
             }
         );
+
+        if (demonDeathCount >= 20 && !gameManager.currentGameEnd)
+        {
+            Console.WriteLine("Won: StopDemonsFromHell");
+            gameManager.RequestSceneChange();
+        }
     }
     
    public override void Draw()

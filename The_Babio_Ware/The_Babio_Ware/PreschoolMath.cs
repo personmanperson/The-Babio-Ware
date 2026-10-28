@@ -18,6 +18,7 @@ public class Paper
     private Vector2 _origin;
     public FloatingPointRectangle rect => new(_pos.X - (_origin.X * spriteScale), _pos.Y - (_origin.Y * spriteScale), curTex.Width * spriteScale, curTex.Height * spriteScale);
     public int value;
+    public bool toDelete;
 
     public Paper(Vector2 pos, int value = 0)
     {
@@ -29,17 +30,26 @@ public class Paper
         this.value = value;
     }
 
-    public void Youcanreallynamefunctionsanythigyouwantitdoesntmatter()
+    public bool Update()
     {
-        if(Math.Abs((InputManager.MousePosition.X + 0.1)/(_pos.X + 0.1)) <= 50)
+        if(InputManager.MouseHitbox.IntersectsFloating(rect) && InputManager.lmbDown)
         {
             _pos.X = InputManager.MousePosition.X;
+            curTex = paperBall;
+            _origin = new Vector2(curTex.Width / 2, curTex.Height / 2);
+            spriteScale = 0.3f;
+            return true;
         }
+        curTex = paperSheet;
+        _origin = new Vector2(curTex.Width / 2, curTex.Height / 2);
+        spriteScale = 1f;
+        return false;
     }
 
     public void Draw()
     {
         Globals.sb.Draw(curTex, _pos, null, Color.White, 0f, _origin, spriteScale, SpriteEffects.None, 0);
+        Globals.sb.DrawString(Game1.font, value.ToString(), rect.Center, Color.Black);
     }
 }
 
@@ -49,6 +59,7 @@ public class PreschoolMath(GameManager gameManager) : Scene(gameManager)
     private Texture2D handTex;
     public int needed;
     public List<Paper> papers;
+    public Paper? grabbed = null;
 
     private AnimationManager _Anims = new();
 
@@ -82,7 +93,8 @@ public class PreschoolMath(GameManager gameManager) : Scene(gameManager)
 
     public override void Deactivate()
     {
-        
+        papers.Clear();
+        grabbed = null;   
     }
 
     public override void Update()
@@ -94,6 +106,42 @@ public class PreschoolMath(GameManager gameManager) : Scene(gameManager)
         else
         {
             _Anims.SetFrame(new Vector2(1, 0), 0);
+        }
+
+        foreach(Paper paper in papers)
+        {
+           bool clicked = paper.Update();
+           if(clicked)
+           {
+               grabbed = paper;
+           }
+        }
+
+        if(grabbed != null)
+        {
+            foreach(var otherPaper in papers)
+            {
+                if(otherPaper != grabbed && grabbed.rect.IntersectsFloating(otherPaper.rect) && !otherPaper.toDelete)
+                {
+                   grabbed.value += otherPaper.value;
+                   Console.WriteLine("Merging papers: " + grabbed.value + " and " + otherPaper.value);
+                   otherPaper.value = 0; //it's useless but makes me feel safer
+                   otherPaper.toDelete = true;
+                }
+            }
+
+            grabbed = null;
+        }
+
+        papers.RemoveAll(paper => paper.toDelete);
+        Console.WriteLine(papers.Count);
+        if(papers.Count == 1 && !gameManager.currentGameEnd)
+        {
+            if(papers[0].value == needed)
+            {
+                Console.WriteLine("Won: PreschoolMath");
+                gameManager.RequestSceneChange();
+            }
         }
     }
 

@@ -30,6 +30,8 @@ public class JudgeCriminal(GameManager gameManager) : Scene(gameManager)
     public float hoopDirection = 1f;
     public Vector2 screenShakeOffset = Vector2.Zero;
     public float shakeIntensity = 0f;
+    private float TIMERTIMERTIEMR;
+    private int basketsToReach;
 
     public override void Load()
     {
@@ -53,6 +55,8 @@ public class JudgeCriminal(GameManager gameManager) : Scene(gameManager)
         audioInstance = levelAudio.CreateInstance();
         audioInstance.IsLooped = true;
         audioInstance.Play();
+        basketsToReach = Globals.Random.Next(1, 3);
+        TIMERTIMERTIEMR = 4f * basketsToReach;
     }
 
     public override void Deactivate()
@@ -75,23 +79,24 @@ public class JudgeCriminal(GameManager gameManager) : Scene(gameManager)
         else
         {
             streak = 0;
-            comboTimer -= 1f;
+            comboTimer -= 1f; //these variables are FAKE and will NEVER be USED maybe
             shakeIntensity -= 0.5f;
         }
     }
 
     public override void Update()
     {
-        local_et += Globals.dt;
-        audioInstance.Pitch = Globals.SinWave * 0.5f * hoopDirection;
+        local_et += Globals.dt * SceneManager.SpeedScale;
+        TIMERTIMERTIEMR -= Globals.dt;
+        audioInstance.Pitch = Globals.SinWave * 0.5f * hoopDirection * SceneManager.SpeedScale;
 
-        hoop._pos.X += 50 * hoopDirection * Globals.dt;
-        criminal1._pos.X += 100 * hoopDirection * Globals.dt;
-        criminal2._pos.X += 70 * hoopDirection * Globals.dt;
+        hoop._pos.X += 50 * hoopDirection * Globals.dt * SceneManager.SpeedScale;
+        criminal1._pos.X += 100 * hoopDirection * Globals.dt * SceneManager.SpeedScale;
+        criminal2._pos.X += 70 * hoopDirection * Globals.dt * SceneManager.SpeedScale;
         if (hoop._pos.X < 300 || hoop._pos.X > Globals.VirtualWidth - 300)
         {
             hoopDirection *= -1f; // Bounce off the walls
-            hoop._pos.X = Math.Clamp(hoop._pos.X, 100, Globals.VirtualWidth - 100);
+            hoop._pos.X = Math.Clamp(hoop._pos.X, 100, Globals.VirtualWidth - 100) + hoopDirection * 50 * Globals.dt * SceneManager.SpeedScale; // Move it back inside the bounds
         }
 
         if(ball.spriteScale < 0.1f && thrown && ball.SCALEDRECT.IntersectsFloating(hoop.SCALEDRECT))
@@ -108,8 +113,8 @@ public class JudgeCriminal(GameManager gameManager) : Scene(gameManager)
         if(thrown)
         {
             ball.spriteScale *= 0.975f;
-            ball.velocity.Y -= float.Clamp(ball.velocity.Y - 300f, -5000f, 5000f);
-            ball._pos.Y = float.Clamp(ball._pos.Y + ball.velocity.Y * Globals.dt, 0, Globals.VirtualHeight - (ball._tex.Height/2 * ball.spriteScale));
+            ball.velocity.Y -= float.Clamp(ball.velocity.Y - 300f, -5000f, 5000f) * Globals.dt * SceneManager.SpeedScale;
+            ball._pos.Y = float.Clamp(ball._pos.Y + ball.velocity.Y * Globals.dt * SceneManager.SpeedScale, 0, Globals.VirtualHeight - (ball._tex.Height/2 * ball.spriteScale)) ;
         }
         else if(ball.SCALEDRECT.IntersectsFloating(InputManager.MouseHitbox) && InputManager.lmb == ButtonState.Pressed)
         {
@@ -118,14 +123,26 @@ public class JudgeCriminal(GameManager gameManager) : Scene(gameManager)
         }
         else
         {
-            ball.velocity.Y -= float.Clamp(ball.velocity.Y - 600f, -5000f, 5000f);
-            ball._pos.Y = float.Clamp(ball._pos.Y + ball.velocity.Y * Globals.dt, 0, Globals.VirtualHeight - (ball._tex.Height/2 * ball.spriteScale));
-            ball._pos.X = float.Clamp(ball._pos.X + ball.velocity.X * Globals.dt, 0 + (ball._tex.Width/2 * ball.spriteScale), Globals.VirtualWidth - (ball._tex.Width/2 * ball.spriteScale));
+            ball.velocity.Y -= float.Clamp(ball.velocity.Y - 600f, -5000f, 5000f) * Globals.dt * SceneManager.SpeedScale;
+            ball._pos.Y = float.Clamp(ball._pos.Y + ball.velocity.Y * Globals.dt * SceneManager.SpeedScale, 0, Globals.VirtualHeight - (ball._tex.Height/2 * ball.spriteScale));
+            ball._pos.X = float.Clamp(ball._pos.X + ball.velocity.X * Globals.dt * SceneManager.SpeedScale, 0 + (ball._tex.Width/2 * ball.spriteScale), Globals.VirtualWidth - (ball._tex.Width/2 * ball.spriteScale));
         }
 
         if (ball._pos.Y > Globals.VirtualHeight/1.55f && thrown)
         {
             ResetBall(false);
+        }
+
+        if (streak >= basketsToReach && !gameManager.currentGameEnd)
+        {
+            gameManager.RequestSceneChange();
+        }
+
+        if (TIMERTIMERTIEMR <= 0 && !gameManager.currentGameEnd)
+        {
+            Globals.currentLives -= 1;
+            gameManager.currentGameEnd = true;
+            gameManager.RequestSceneChange();
         }
     }
 

@@ -46,12 +46,12 @@ public class Fly
     {
         if (flydead)
         {
-            byebyeTimer -= Globals.dt;
-            _spriteScale -= Globals.dt;
+            byebyeTimer -= Globals.dt * SceneManager.SpeedScale;
+            _spriteScale -= Globals.dt * SceneManager.SpeedScale;
         }
         else
         {
-            _pos.X += _speed * (float)Globals.dt;
+            _pos.X += _speed * Globals.dt * SceneManager.SpeedScale;
             if (_pos.X > Globals.VirtualWidth + _tex.Width)
             {
                 flyLeft = true;
@@ -110,12 +110,12 @@ public class Hand
     {
         if(handHit == true || handLeft == true)
         {
-            DisapearTimer -= Globals.dt;
-            _spriteScale -= Globals.dt;
+            DisapearTimer -= Globals.dt * SceneManager.SpeedScale;
+            _spriteScale -= Globals.dt * SceneManager.SpeedScale;
         }
         else
         {
-            _pos.X += _speed * (float)Globals.dt;
+            _pos.X += _speed * (float)Globals.dt * SceneManager.SpeedScale;
             if (_pos.X > Globals.VirtualWidth + _tex.Width)
             {
                 handLeft = true;
@@ -148,8 +148,8 @@ public class Smack
     
     public void Update()
     {
-        spriteScale -= Globals.dt * 3;
-        lifeTimer -= Globals.dt;
+        spriteScale -= Globals.dt * 3 * SceneManager.SpeedScale;
+        lifeTimer -= Globals.dt * SceneManager.SpeedScale;
     }
 
     public void Draw()
@@ -201,15 +201,15 @@ public class FlySwat(GameManager gameManager) : Scene(gameManager)
         local_et = 0;
         levelWon = false;
         levelTimer = 15f;
-        win = Globals.Random.Next(10, 19);
+        win = Globals.Random.Next(5, 12);
     }
 
     public override void Update()
     {
-        local_et += Globals.dt;
-        startupTime -= Globals.dt;
-        levelTimer -= Globals.dt;
-        if (local_et >= 2 && startupTime <= 0)
+        local_et += Globals.dt * SceneManager.SpeedScale;
+        startupTime -= Globals.dt * SceneManager.SpeedScale;
+        levelTimer -= Globals.dt * SceneManager.SpeedScale;
+        if (local_et >= 0.75 && startupTime <= 0)
         {
             local_et = 0;
             int rand = Globals.Random.Next(1,4);
@@ -283,25 +283,26 @@ public class FlySwat(GameManager gameManager) : Scene(gameManager)
             }
         );
 
-        if (levelTimer <= 0 || Points < -5)
+        if (levelTimer <= 0 && !gameManager.currentGameEnd || Points < -5 && !gameManager.currentGameEnd)
         {
             Globals.currentLives -= 1;
-            //Globals.TransitionState = true;
-            //Globals.SwitchScene = true;
+            gameManager.currentGameEnd = true;
+            Console.WriteLine("Lost: FlySwat");
+            gameManager.RequestSceneChange();
         }
 
-        if (Points > win)
+        if (Points > win && !gameManager.currentGameEnd)
         {
-            //Globals.TransitionState = true;
-            //Globals.SwitchScene = true;
+            Console.WriteLine("Won: FlySwat");
+            gameManager.RequestSceneChange();
         }
     }
 
     public override void Deactivate()
     {
-        flies.RemoveAll(fly => true);
-        smacks.RemoveAll(smack => true);
-        hands.RemoveAll(hand => true);
+        flies.Clear();
+        smacks.Clear();
+        hands.Clear();
     }
 
     public override void Draw()
