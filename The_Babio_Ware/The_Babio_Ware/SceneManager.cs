@@ -94,6 +94,8 @@ public class SceneManager
         _scenes[ActiveScene].Activate();
         SceneQueued = false;
         QueuedScene = null;
+        Console.WriteLine($"Switched to scene: {ActiveScene}"); //Should NOT trigger 35 times
+        Console.WriteLine($"{Globals.currentLives}"); //Should NOT trigger 35 times
     }
 
     public void Update()

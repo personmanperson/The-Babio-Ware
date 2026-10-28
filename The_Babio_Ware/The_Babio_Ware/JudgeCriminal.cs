@@ -133,15 +133,14 @@ public class JudgeCriminal(GameManager gameManager) : Scene(gameManager)
             ResetBall(false);
         }
 
-        if (streak >= basketsToReach && !gameManager.currentGameEnd)
+        if (streak >= basketsToReach)
         {
             gameManager.RequestSceneChange();
         }
 
-        if (TIMERTIMERTIEMR <= 0 && !gameManager.currentGameEnd)
+        if (TIMERTIMERTIEMR <= 0)
         {
             Globals.currentLives -= 1;
-            gameManager.currentGameEnd = true;
             gameManager.RequestSceneChange();
         }
     }

@@ -283,15 +283,13 @@ public class FlySwat(GameManager gameManager) : Scene(gameManager)
             }
         );
 
-        if (levelTimer <= 0 && !gameManager.currentGameEnd || Points < -5 && !gameManager.currentGameEnd)
+        if (levelTimer <= 0|| Points < -5)
         {
             Globals.currentLives -= 1;
-            gameManager.currentGameEnd = true;
-            Console.WriteLine("Lost: FlySwat");
             gameManager.RequestSceneChange();
         }
 
-        if (Points > win && !gameManager.currentGameEnd)
+        if (Points > win)
         {
             Console.WriteLine("Won: FlySwat");
             gameManager.RequestSceneChange();

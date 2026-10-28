@@ -135,11 +135,10 @@ public class PreschoolMath(GameManager gameManager) : Scene(gameManager)
 
         papers.RemoveAll(paper => paper.toDelete);
         Console.WriteLine(papers.Count);
-        if(papers.Count == 1 && !gameManager.currentGameEnd)
+        if(papers.Count == 1)
         {
             if(papers[0].value == needed)
             {
-                Console.WriteLine("Won: PreschoolMath");
                 gameManager.RequestSceneChange();
             }
         }

@@ -185,18 +185,14 @@ public class STOPTHEFIRE(GameManager gameManager) : Scene(gameManager)
         );
         steams.RemoveAll(smoke => smoke.lifeTime <= 0);
 
-        if (levelTimer <= 0 && !gameManager.currentGameEnd || Points < -5 && !gameManager.currentGameEnd)
+        if (levelTimer <= 0 || Points < -5)
         {
             Globals.currentLives -= 1;
-            gameManager.currentGameEnd = true;
-            Console.WriteLine("Lost: STOPTHEFIRE");
             gameManager.RequestSceneChange();
         }
 
-        if (Points >= PointsToWin && fires.Count == 0 && !gameManager.currentGameEnd)
+        if (Points >= PointsToWin && fires.Count == 0)
         {
-            gameManager.currentGameEnd = true;
-            Console.WriteLine("Won: STOPTHEFIRE");
             gameManager.RequestSceneChange();
         }
     }

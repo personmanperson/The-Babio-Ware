@@ -11,7 +11,6 @@ public class GameManager
 {
     private SceneManager _sceneManager;
     private Curtains _curtain;
-    public bool currentGameEnd = false;
 
     public GameManager()
     {
@@ -36,7 +35,6 @@ public class GameManager
         {
             {
                 _sceneManager.SwitchScene();
-                currentGameEnd = false;
             }
         }
 
@@ -49,8 +47,9 @@ public class GameManager
         var frame = _sceneManager.GetFrame();
 
         spriteBatch.Begin();
-        Globals.sb.Draw(frame, new Rectangle(0, 0, Globals.VirtualWidth, Globals.VirtualHeight), Color.White);        
+        Globals.sb.Draw(frame, new Rectangle(0, 0, Globals.VirtualWidth, Globals.VirtualHeight), Color.White);       
         _curtain.Draw();
+        Globals.sb.DrawString(Game1.font, $"Lives: {Globals.currentLives}", Globals.ScreenCenter, Color.White, 0f, new Vector2(Game1.font.MeasureString($"Lives: {Globals.currentLives}").X/2f, 0), 2f, SpriteEffects.None, 0); 
         spriteBatch.End();
     }
 }

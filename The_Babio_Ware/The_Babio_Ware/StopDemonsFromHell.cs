@@ -219,9 +219,8 @@ public class StopDemonsFromHell(GameManager gameManager) : Scene(gameManager)
             }
         );
 
-        if (demonDeathCount >= 20 && !gameManager.currentGameEnd)
+        if (demonDeathCount >= 20)
         {
-            Console.WriteLine("Won: StopDemonsFromHell");
             gameManager.RequestSceneChange();
         }
     }
