@@ -202,6 +202,7 @@ public class FlySwat(GameManager gameManager) : Scene(gameManager)
         levelWon = false;
         levelTimer = 15f;
         win = Globals.Random.Next(5, 12);
+        Active = true;
     }
 
     public override void Update()
@@ -283,16 +284,16 @@ public class FlySwat(GameManager gameManager) : Scene(gameManager)
             }
         );
 
-        if (levelTimer <= 0|| Points < -5)
+        if (levelTimer <= 0 && Active || Points < -5 && Active)
         {
-            Globals.currentLives -= 1;
-            gameManager.RequestSceneChange();
+            gameManager.RequestSceneChange(false);
+            Active = false;
         }
 
-        if (Points > win)
+        if (Points > win && Active)
         {
-            Console.WriteLine("Won: FlySwat");
-            gameManager.RequestSceneChange();
+            gameManager.RequestSceneChange(true);
+            Active = false;
         }
     }
 

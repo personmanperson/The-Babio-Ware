@@ -28,7 +28,7 @@ public class FIRE
 
     public void Damage()
     {
-        sprite.spriteScale = sprite.spriteScale > 1? sprite.spriteScale * 0.2f : sprite.spriteScale - 0.6f;
+        sprite.spriteScale = sprite.spriteScale > 1? sprite.spriteScale * 0.17f : sprite.spriteScale - 0.8f;
         if (sprite.spriteScale <= 0.01f)
         {
             extinguished = true;
@@ -78,7 +78,7 @@ public class STOPTHEFIRE(GameManager gameManager) : Scene(gameManager)
         local_et = 0;
         startupTime = 1;
         firesExtinguished = 0;
-        levelTimer = 11f;
+        levelTimer = 8.331f;
         PointsToWin = Globals.Random.Next(7,13);
         Points = 0;
         startBurstUsed = false;
@@ -86,6 +86,7 @@ public class STOPTHEFIRE(GameManager gameManager) : Scene(gameManager)
         droplets = new();
         fires = new();
         MediaPlayer.Play(levelAudio);
+        Active = true;
     }
     
     public override void Deactivate()
@@ -158,7 +159,7 @@ public class STOPTHEFIRE(GameManager gameManager) : Scene(gameManager)
 
             foreach(FIRE fireObj in fires)
             {
-                if (water.SCALEDRECT.Intersects(fireObj.sprite._rect))
+                if (water.SCALEDRECT.IntersectsFloating(fireObj.sprite.SCALEDRECT))
                 {
                     water.kill = true;
                     fireObj.Damage();
@@ -185,15 +186,16 @@ public class STOPTHEFIRE(GameManager gameManager) : Scene(gameManager)
         );
         steams.RemoveAll(smoke => smoke.lifeTime <= 0);
 
-        if (levelTimer <= 0 || Points < -5)
+        if (levelTimer <= 0 && Active || Points < -5 && Active)
         {
-            Globals.currentLives -= 1;
-            gameManager.RequestSceneChange();
+            gameManager.RequestSceneChange(false);
+            Active = false;
         }
 
-        if (Points >= PointsToWin && fires.Count == 0)
+        if (Points >= PointsToWin && fires.Count == 0 && Active)
         {
-            gameManager.RequestSceneChange();
+            gameManager.RequestSceneChange(true);
+            Active = false;
         }
     }
 

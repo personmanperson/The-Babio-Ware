@@ -57,6 +57,7 @@ public class JudgeCriminal(GameManager gameManager) : Scene(gameManager)
         audioInstance.Play();
         basketsToReach = Globals.Random.Next(1, 3);
         TIMERTIMERTIEMR = 4f * basketsToReach;
+        Active = true;
     }
 
     public override void Deactivate()
@@ -133,15 +134,17 @@ public class JudgeCriminal(GameManager gameManager) : Scene(gameManager)
             ResetBall(false);
         }
 
-        if (streak >= basketsToReach)
+        if (streak >= basketsToReach && Active)
         {
-            gameManager.RequestSceneChange();
+            gameManager.RequestSceneChange(true);
+            Active = false;
         }
 
-        if (TIMERTIMERTIEMR <= 0)
+        if (TIMERTIMERTIEMR <= 0 && Active)
         {
             Globals.currentLives -= 1;
-            gameManager.RequestSceneChange();
+            gameManager.RequestSceneChange(false);
+            Active = false;
         }
     }
 

@@ -9,6 +9,7 @@ public abstract class Scene
 {
     public readonly RenderTarget2D RenderTarget;
     public GameManager gameManager;
+    public bool Active = true;
 
     public Scene(GameManager gameManager)
     {

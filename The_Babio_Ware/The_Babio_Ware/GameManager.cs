@@ -11,15 +11,24 @@ public class GameManager
 {
     private SceneManager _sceneManager;
     private Curtains _curtain;
+    private GerberSnacks _gerberSnacks;
 
     public GameManager()
     {
         _sceneManager = new SceneManager(this);
         _curtain = new Curtains();
+        _gerberSnacks = new GerberSnacks();
+        _gerberSnacks.ResetGerberSnacks();
     }
 
-    public void RequestSceneChange(Scenes? scene = null)
-    { _sceneManager.RequestChange(scene);}
+    public void RequestSceneChange(bool won, Scenes? scene = null)
+    {
+        if(!won)
+        {
+            _gerberSnacks.SetRightmostGerberSnackToExplosion();
+        }
+         _sceneManager.RequestChange(_gerberSnacks, scene);
+    }
 
     public void ForceSceneChange(Scenes scene)
     { _sceneManager.ForceChange(scene);}
@@ -28,6 +37,7 @@ public class GameManager
     {
         if (InputManager.KeyPressed(Keys.F1))
         {
+            _gerberSnacks.ResetGerberSnacks();
             ForceSceneChange(Scenes.TitleScreen);
         }
 
@@ -39,6 +49,7 @@ public class GameManager
         }
 
         _sceneManager.Update();
+        _gerberSnacks.Update();
         _curtain.Update(_sceneManager);
     }
 
@@ -47,9 +58,12 @@ public class GameManager
         var frame = _sceneManager.GetFrame();
 
         spriteBatch.Begin();
-        Globals.sb.Draw(frame, new Rectangle(0, 0, Globals.VirtualWidth, Globals.VirtualHeight), Color.White);       
+        Globals.sb.Draw(frame, new Rectangle(0, 0, Globals.VirtualWidth, Globals.VirtualHeight), Color.White);      
+        if (_sceneManager.ActiveScene != Scenes.TitleScreen && _sceneManager.ActiveScene != Scenes.BabioPaint)
+        {
+            _gerberSnacks.Draw(spriteBatch);
+        }
         _curtain.Draw();
-        Globals.sb.DrawString(Game1.font, $"Lives: {Globals.currentLives}", Globals.ScreenCenter, Color.White, 0f, new Vector2(Game1.font.MeasureString($"Lives: {Globals.currentLives}").X/2f, 0), 2f, SpriteEffects.None, 0); 
         spriteBatch.End();
     }
 }

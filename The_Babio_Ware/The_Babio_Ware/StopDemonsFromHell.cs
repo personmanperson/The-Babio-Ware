@@ -78,6 +78,8 @@ public class StopDemonsFromHell(GameManager gameManager) : Scene(gameManager)
     public SoundEffect gunShot;
     public SoundEffect squishShot;
 
+    private float LevelTimer = 0f;
+
     public int demonDeathCount = 0;
 
     public readonly float CD = 0.31f;
@@ -123,7 +125,9 @@ public class StopDemonsFromHell(GameManager gameManager) : Scene(gameManager)
         var sheet = Globals.GetRandomItem(DemonSpriteSheets);
         Demon newDemon = new(sheet, Globals.ScreenCenter);
         Demons.Add(newDemon);
+        LevelTimer = 0f;
         MediaPlayer.Play(levelAudio);
+        Active = true;
     }
    
    public override void Deactivate()
@@ -153,6 +157,7 @@ public class StopDemonsFromHell(GameManager gameManager) : Scene(gameManager)
     {
         total_et += Globals.dt * SceneManager.SpeedScale;
         local_et += Globals.dt * SceneManager.SpeedScale;
+        LevelTimer += Globals.dt * SceneManager.SpeedScale;
 
         if (local_et >= 0.08f)
         {
@@ -219,9 +224,16 @@ public class StopDemonsFromHell(GameManager gameManager) : Scene(gameManager)
             }
         );
 
-        if (demonDeathCount >= 20)
+        if (demonDeathCount >= 20 && Active)
         {
-            gameManager.RequestSceneChange();
+            gameManager.RequestSceneChange(true);
+            Active = false;
+        }
+
+        if (Demons.Count >= 100 && Active || LevelTimer >= 10f && Active)
+        {
+            gameManager.RequestSceneChange(false);
+            Active = false;
         }
     }
     

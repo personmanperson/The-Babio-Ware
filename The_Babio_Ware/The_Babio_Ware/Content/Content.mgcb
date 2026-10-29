@@ -13,6 +13,32 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin 00015000045203_c1n1_44429731-removebg.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:00015000045203_c1n1_44429731-removebg.png;gs1.png
+
+#begin 00015000045210_c1n1_44429736-removebg.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:00015000045210_c1n1_44429736-removebg.png;gs2.png
+
 #begin 052014.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -38,6 +64,19 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:5-2-fly-png-3.png;Fly.png
+
+#begin 522-5229434_explosion-png-download-explosion-transparent-png-removebg.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:522-5229434_explosion-png-download-explosion-transparent-png-removebg.png;gs3.png
 
 #begin 6739-removebg-preview.png
 /importer:TextureImporter

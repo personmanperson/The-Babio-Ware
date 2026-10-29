@@ -68,12 +68,14 @@ public static class Globals
     public static float dt;
     public static float et = 0f;
     public static float SinWave;
+    public static float SinWave2;
 
     public static void GameTimeVoid(GameTime gameTime)
     {
         dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
         et = (float)gameTime.TotalGameTime.TotalSeconds;
         SinWave = (float)Math.Sin(et * 2) * 0.5f + 0.5f;
+        SinWave2 = (float)Math.Sin(et * 4) * 0.5f;
     }
 
     public static float sqdist2D(Vector2 a, Vector2 b)

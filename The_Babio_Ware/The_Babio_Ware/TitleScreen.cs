@@ -144,8 +144,7 @@ public class TitleScreen(GameManager gameManager) : Scene(gameManager)
             
             if (startButton.spriteScale <= 0.32f && !isTransitioning) 
             {
-                Globals.currentMinigame = 0;
-                gameManager.RequestSceneChange();
+                gameManager.RequestSceneChange(true);
                 isTransitioning = true;
             }
         }
@@ -189,9 +188,9 @@ public class TitleScreen(GameManager gameManager) : Scene(gameManager)
     public override void Draw()
     {
         Globals.sb.Draw(screenTexture, Globals.gd.Viewport.Bounds, Color.White);
-        mj1.Draw(Globals.sb, GetColorFromTime(Globals.SinWave * 0.1f, 0f));
-        mj2.Draw(Globals.sb, GetColorFromTime(Globals.SinWave * 0.1f, 0f));
-        mj3.Draw(Globals.sb, GetColorFromTime(Globals.SinWave * 0.1f, 0f));
+        mj1.Draw(Globals.sb, GetColorFromTime(Globals.SinWave * 0.11f, 0.05f));
+        mj2.Draw(Globals.sb, GetColorFromTime(Globals.SinWave * 0.22f, 0.05f));
+        mj3.Draw(Globals.sb, GetColorFromTime(Globals.SinWave * 0.44f, 0.05f));
         startButton.Draw(Globals.sb);
         babioPaintButton.Draw(Globals.sb);
         Globals.sb.DrawString(Game1.font, startMessage, new Vector2(startButton.Rect.X + startButton.Rect.Width/2, startButton.Rect.Bottom), Color.Black, Globals.SinWave * 0.0001f, Game1.font.MeasureString(startMessage)/ 2, 3 * startButton.spriteScale, SpriteEffects.None, 0f);

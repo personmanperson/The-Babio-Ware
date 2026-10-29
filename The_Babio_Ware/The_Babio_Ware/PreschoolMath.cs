@@ -60,6 +60,7 @@ public class PreschoolMath(GameManager gameManager) : Scene(gameManager)
     public int needed;
     public List<Paper> papers;
     public Paper? grabbed = null;
+    public float timer = 5f;
 
     private AnimationManager _Anims = new();
 
@@ -89,6 +90,8 @@ public class PreschoolMath(GameManager gameManager) : Scene(gameManager)
             papers.Add(paper);
             needed += next;
         }
+        timer = 5f;
+        Active = true;
     }
 
     public override void Deactivate()
@@ -99,6 +102,7 @@ public class PreschoolMath(GameManager gameManager) : Scene(gameManager)
 
     public override void Update()
     {
+        timer -= Globals.dt * SceneManager.SpeedScale;
         if(InputManager.lmbDown)
         {
             _Anims.SetFrame(new Vector2(1, 0), 1);
@@ -135,12 +139,19 @@ public class PreschoolMath(GameManager gameManager) : Scene(gameManager)
 
         papers.RemoveAll(paper => paper.toDelete);
         Console.WriteLine(papers.Count);
-        if(papers.Count == 1)
+        if(papers.Count == 1 && Active)
         {
             if(papers[0].value == needed)
             {
-                gameManager.RequestSceneChange();
+                gameManager.RequestSceneChange(true);
+                Active = false;
             }
+        }
+
+        if(timer <= 0 && Active)
+        {
+            gameManager.RequestSceneChange(false);
+            Active = false;
         }
     }
 
